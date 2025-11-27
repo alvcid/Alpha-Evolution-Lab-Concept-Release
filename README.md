@@ -1,25 +1,25 @@
 # Alpha Evolution Lab – Concept Release
 
-Sistema de evolución asistida por IA para la generación y optimización de señales cuantitativas (alphas) en mercados financieros.
+AI-assisted evolution system for the generation and optimization of quantitative signals (alphas) in financial markets.
 
-## Descripción
+## Description
 
-Alpha Evolution Lab es una plataforma experimental que combina algoritmos evolutivos con modelos de lenguaje (LLMs) para explorar el espacio de posibles estrategias de trading cuantitativo. El sistema genera, evalúa y evoluciona automáticamente código de señales financieras mediante un proceso iterativo de mutación y selección basado en métricas de rendimiento.
+Alpha Evolution Lab is an experimental platform that combines evolutionary algorithms with language models (LLMs) to explore the space of possible quantitative trading strategies. The system automatically generates, evaluates, and evolves financial signal code through an iterative process of mutation and selection based on performance metrics.
 
-**Nota:** Este repositorio contiene componentes conceptuales únicamente. La implementación completa es propiedad de TradeAndRoll.
+**Note:** This repository contains conceptual components only. The full implementation is proprietary to TradeAndRoll.
 
-## Características Principales
+## Main Features
 
-- **Generación Automática de Alphas**: Utiliza LLMs para crear código de señales financieras a partir de prompts de alto nivel
-- **Evolución Guiada**: Sistema de mutación y selección que refina iterativamente las estrategias más prometedoras
-- **Evaluación Rigurosa**: Backtesting con métricas estándar de la industria (IC, Sharpe, Drawdown, etc.)
-- **Interfaz Visual**: Dashboard web para monitorear el proceso de evolución en tiempo real
-- **Validación Out-of-Sample**: Separación estricta entre datos de entrenamiento y validación para evitar overfitting
-- **Múltiples Estrategias de Mutación**: Adaptación según condiciones de mercado (volatilidad, régimen, volumen)
+- **Automatic Alpha Generation**: Uses LLMs to create financial signal code from high-level prompts
+- **Guided Evolution**: Mutation and selection system that iteratively refines the most promising strategies
+- **Rigorous Evaluation**: Backtesting with industry-standard metrics (IC, Sharpe, Drawdown, etc.)
+- **Visual Interface**: Web dashboard to monitor the evolution process in real-time
+- **Out-of-Sample Validation**: Strict separation between training and validation data to avoid overfitting
+- **Multiple Mutation Strategies**: Adaptation according to market conditions (volatility, regime, volume)
 
-## Arquitectura Conceptual
+## Conceptual Architecture
 
-### Componentes Principales
+### Main Components
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -58,107 +58,107 @@ Alpha Evolution Lab es una plataforma experimental que combina algoritmos evolut
 └─────────────────────────────────────────────────────────────┘
 ```
 
-### Flujo de Trabajo
+### Workflow
 
-1. **Inicialización**: El usuario proporciona un prompt descriptivo de alto nivel
-2. **Generación**: El LLM genera una población inicial de alphas (código de señales)
-3. **Evaluación**: Cada alpha se backtestea en datos históricos, calculando métricas de rendimiento
-4. **Selección**: Se identifican los mejores alphas según criterios de IC y estabilidad
-5. **Evolución**: Los alphas seleccionados se mutan mediante prompts especializados al LLM
-6. **Iteración**: El proceso se repite hasta alcanzar criterios de convergencia o límites de iteración
+1. **Initialization**: User provides a high-level descriptive prompt
+2. **Generation**: LLM generates an initial population of alphas (signal code)
+3. **Evaluation**: Each alpha is backtested on historical data, calculating performance metrics
+4. **Selection**: Best alphas are identified according to IC and stability criteria
+5. **Evolution**: Selected alphas are mutated through specialized prompts to the LLM
+6. **Iteration**: Process repeats until convergence criteria or iteration limits are reached
 
-### Módulos del Sistema
+### System Modules
 
-- **Core Engine**: Motor de evolución que gestiona poblaciones y generaciones
-- **LLM Integration**: Abstracción para múltiples proveedores de LLM con fallback automático
-- **Backtesting Framework**: Ejecución de código Python en el navegador mediante Pyodide
-- **Data Pipeline**: Carga y preprocesamiento de datos de mercado históricos
-- **Metrics Calculator**: Cálculo de métricas financieras estándar (IC, Sharpe, Sortino, etc.)
-- **UI Components**: Componentes React para visualización y control del proceso
+- **Core Engine**: Evolution engine that manages populations and generations
+- **LLM Integration**: Abstraction for multiple LLM providers with automatic fallback
+- **Backtesting Framework**: Python code execution in the browser via Pyodide
+- **Data Pipeline**: Loading and preprocessing of historical market data
+- **Metrics Calculator**: Calculation of standard financial metrics (IC, Sharpe, Sortino, etc.)
+- **UI Components**: React components for visualization and process control
 
-## Ejemplos de Entrada/Salida
+## Input/Output Examples
 
-### Entrada (Prompt de Usuario)
+### Input (User Prompt)
 
 ```
-Genera alphas que identifiquen reversiones de precio después de movimientos 
-extremos de volatilidad, usando indicadores de volumen y momentum.
+Generate alphas that identify price reversals after extreme volatility movements,
+using volume and momentum indicators.
 ```
 
-### Salida (Alpha Generado)
+### Output (Generated Alpha)
 
-El sistema produce código Python que implementa la señal, junto con:
-- **Código de la señal**: Función que procesa datos OHLCV y retorna señales
-- **Razonamiento**: Explicación textual de la lógica del alpha
-- **Métricas de evaluación**: IC in-sample, IC out-of-sample, Sharpe ratio, etc.
+The system produces Python code that implements the signal, along with:
+- **Signal code**: Function that processes OHLCV data and returns signals
+- **Reasoning**: Textual explanation of the alpha logic
+- **Evaluation metrics**: In-sample IC, out-of-sample IC, Sharpe ratio, etc.
 
-### Formato de Datos
+### Data Format
 
-**Entrada esperada:**
-- Datos OHLCV históricos (Open, High, Low, Close, Volume)
-- Rango de fechas configurable
-- Ticker o símbolo del instrumento
+**Expected input:**
+- Historical OHLCV data (Open, High, Low, Close, Volume)
+- Configurable date range
+- Ticker or instrument symbol
 
-**Salida producida:**
-- Señales binarias (compra/venta) o continuas (pesos)
-- Métricas de rendimiento por alpha
-- Estadísticas agregadas por generación
+**Produced output:**
+- Binary signals (buy/sell) or continuous (weights)
+- Performance metrics per alpha
+- Aggregated statistics per generation
 
-## Pseudocódigo Seguro
+## Safe Pseudocode
 
-### Proceso de Evolución Principal
+### Main Evolution Process
 
 ```
 function evolve_alpha_population(initial_prompt, max_generations):
     population = generate_initial_population(initial_prompt)
     
     for generation in range(max_generations):
-        # Evaluar población actual
+        # Evaluate current population
         for alpha in population:
             alpha.score = evaluate_alpha(alpha.code, training_data)
             alpha.validation_score = evaluate_alpha(alpha.code, validation_data)
         
-        # Detectar overfitting
+        # Detect overfitting
         if detect_overfitting(population):
             stop_evolution()
             break
         
-        # Selección elitista
+        # Elitist selection
         elite_alphas = select_top_n(population, n=3)
         random_alpha = select_random(population)
         parents = [elite_alphas, random_alpha]
         
-        # Mutación mediante LLM
+        # Mutation via LLM
         new_alphas = []
         for parent in parents:
             mutations = llm_mutate(parent, mutation_strategy)
             new_alphas.extend(mutations)
         
-        # Actualizar población
+        # Update population
         population = merge_and_rank(population, new_alphas)
         population = keep_top_k(population, k=10)
         
-        # Criterio de parada
+        # Stopping criterion
         if convergence_detected(population):
             break
     
     return best_alphas(population)
 ```
 
-### Evaluación de Alpha
+### Alpha Evaluation
 
 ```
 function evaluate_alpha(alpha_code, market_data):
-    # Ejecutar código del alpha en entorno seguro
+    # Execute alpha code in safe environment
     signals = execute_alpha_code(alpha_code, market_data)
     
-    # Calcular retornos forward
+    # Calculate forward returns
     forward_returns = calculate_forward_returns(market_data)
     
-    # Information Coefficient (correlación señal-retorno)
+    # Information Coefficient (signal-return correlation)
     ic = correlation(signals, forward_returns)
     
-    # Métricas adicionales
+    # Additional metrics
     sharpe = calculate_sharpe_ratio(signals, forward_returns)
     max_drawdown = calculate_max_drawdown(signals, forward_returns)
     
@@ -169,74 +169,74 @@ function evaluate_alpha(alpha_code, market_data):
     }
 ```
 
-### Estrategia de Mutación
+### Mutation Strategy
 
 ```
 function llm_mutate(parent_alpha, strategy):
     prompt = build_mutation_prompt(parent_alpha, strategy)
     
     if strategy == ADAPTIVE_VOLATILITY:
-        prompt += "Adapta el alpha para diferentes regímenes de volatilidad"
+        prompt += "Adapt the alpha for different volatility regimes"
     elif strategy == MARKET_REGIME:
-        prompt += "Modifica el alpha para detectar cambios de régimen de mercado"
+        prompt += "Modify the alpha to detect market regime changes"
     elif strategy == VOLUME_FILTER:
-        prompt += "Añade filtros basados en volumen para mejorar robustez"
+        prompt += "Add volume-based filters to improve robustness"
     
     mutated_code = llm_generate(prompt)
     return parse_alpha_from_response(mutated_code)
 ```
 
-## Métricas y Rendimiento
+## Metrics and Performance
 
-### Métricas Principales
+### Main Metrics
 
-- **Information Coefficient (IC)**: Correlación entre señal y retorno forward
-  - Rango típico: 0.01 - 0.05 (valores superiores a 0.06 son sospechosos)
-  - Objetivo: IC estable > 0.02
+- **Information Coefficient (IC)**: Correlation between signal and forward return
+  - Typical range: 0.01 - 0.05 (values above 0.06 are suspicious)
+  - Target: Stable IC > 0.02
 
-- **Sharpe Ratio**: Retorno ajustado por riesgo
-  - Objetivo: > 1.0 (bueno), > 2.0 (excelente)
+- **Sharpe Ratio**: Risk-adjusted return
+  - Target: > 1.0 (good), > 2.0 (excellent)
 
-- **Maximum Drawdown**: Pérdida máxima desde un pico
-  - Objetivo: < 20% para estrategias conservadoras
+- **Maximum Drawdown**: Maximum loss from a peak
+  - Target: < 20% for conservative strategies
 
-- **Win Rate**: Porcentaje de trades ganadores
-  - Objetivo: > 50% (depende del profit factor)
+- **Win Rate**: Percentage of winning trades
+  - Target: > 50% (depends on profit factor)
 
-- **Profit Factor**: Ratio de ganancias totales vs pérdidas totales
-  - Objetivo: > 1.5
+- **Profit Factor**: Ratio of total gains vs total losses
+  - Target: > 1.5
 
-### Métricas de Validación
+### Validation Metrics
 
-- **IC Decay**: Diferencia entre IC in-sample y out-of-sample
-  - Señal de alarma: Decay > 50% indica overfitting
+- **IC Decay**: Difference between in-sample and out-of-sample IC
+  - Warning signal: Decay > 50% indicates overfitting
 
-- **Stability Score**: Consistencia del IC a través del tiempo
-  - Objetivo: Desviación estándar del IC < 0.01
+- **Stability Score**: IC consistency over time
+  - Target: IC standard deviation < 0.01
 
 ## Roadmap
 
-### Fase 1: Mejoras de Estabilidad (Q1)
-- [ ] Implementar purged cross-validation para evitar data leakage
-- [ ] Añadir detección automática de look-ahead bias
-- [ ] Sistema de alertas para métricas sospechosas
+### Phase 1: Stability Improvements (Q1)
+- [ ] Implement purged cross-validation to avoid data leakage
+- [ ] Add automatic look-ahead bias detection
+- [ ] Alert system for suspicious metrics
 
-### Fase 2: Expansión de Capacidades (Q2)
-- [ ] Soporte para múltiples timeframes (intraday, diario, semanal)
-- [ ] Integración con más proveedores de datos de mercado
-- [ ] Sistema de combinación de alphas (ensemble methods)
+### Phase 2: Capability Expansion (Q2)
+- [ ] Support for multiple timeframes (intraday, daily, weekly)
+- [ ] Integration with more market data providers
+- [ ] Alpha combination system (ensemble methods)
 
-### Fase 3: Optimización Avanzada (Q3)
-- [ ] Optimización de hiperparámetros mediante bayesian optimization
-- [ ] Análisis de correlación entre alphas para diversificación
-- [ ] Backtesting walk-forward con ventanas móviles
+### Phase 3: Advanced Optimization (Q3)
+- [ ] Hyperparameter optimization via Bayesian optimization
+- [ ] Correlation analysis between alphas for diversification
+- [ ] Walk-forward backtesting with moving windows
 
-### Fase 4: Producción (Q4)
-- [ ] API REST para integración con sistemas de ejecución
-- [ ] Monitoreo en tiempo real de alphas desplegados
-- [ ] Sistema de alertas y notificaciones
+### Phase 4: Production (Q4)
+- [ ] REST API for integration with execution systems
+- [ ] Real-time monitoring of deployed alphas
+- [ ] Alert and notification system
 
-## Estructura de Carpetas Recomendada
+## Recommended Folder Structure
 
 ```
 alpha-evolution-lab/
@@ -289,28 +289,28 @@ alpha-evolution-lab/
     └── best_practices.md
 ```
 
-## Advertencia Legal
+## Legal Notice
 
 **Note: This repository contains conceptual components only. Full implementation is proprietary to TradeAndRoll.**
 
-Este repositorio está destinado únicamente a fines educativos y de demostración conceptual. La implementación completa, incluyendo algoritmos propietarios, heurísticas de optimización, y configuraciones específicas, es propiedad exclusiva de TradeAndRoll y no está incluida en este repositorio.
+This repository is intended solely for educational and conceptual demonstration purposes. The complete implementation, including proprietary algorithms, optimization heuristics, and specific configurations, is the exclusive property of TradeAndRoll and is not included in this repository.
 
-El uso de este código para fines comerciales o de producción requiere una licencia apropiada de TradeAndRoll.
+Use of this code for commercial or production purposes requires an appropriate license from TradeAndRoll.
 
-## Resumen Ejecutivo Técnico
+## Technical Executive Summary
 
-Alpha Evolution Lab representa un enfoque novedoso para la generación automatizada de estrategias cuantitativas mediante la combinación de algoritmos evolutivos y modelos de lenguaje. El sistema aborda el desafío de explorar eficientemente el vasto espacio de posibles señales financieras mediante:
+Alpha Evolution Lab represents a novel approach to automated quantitative strategy generation by combining evolutionary algorithms and language models. The system addresses the challenge of efficiently exploring the vast space of possible financial signals through:
 
-1. **Automatización Inteligente**: Reducción del tiempo de desarrollo de alphas de semanas a horas
-2. **Exploración Sistemática**: Búsqueda guiada en el espacio de estrategias mediante evolución dirigida
-3. **Validación Rigurosa**: Separación estricta de datos y métricas estándar de la industria
-4. **Escalabilidad**: Arquitectura modular que permite extensión a múltiples mercados y timeframes
+1. **Intelligent Automation**: Reduction of alpha development time from weeks to hours
+2. **Systematic Exploration**: Guided search in strategy space through directed evolution
+3. **Rigorous Validation**: Strict data separation and industry-standard metrics
+4. **Scalability**: Modular architecture that allows extension to multiple markets and timeframes
 
-El sistema está diseñado para complementar, no reemplazar, el juicio humano en el desarrollo de estrategias cuantitativas, proporcionando una herramienta de exploración y prototipado rápido.
+The system is designed to complement, not replace, human judgment in quantitative strategy development, providing a tool for rapid exploration and prototyping.
 
 ---
 
-**Versión**: 0.1.0 (Concept Release)  
-**Licencia**: Ver LICENSE  
-**Mantenido por**: TradeAndRoll Research Team
+**Version**: 0.1.0 (Concept Release)  
+**License**: See LICENSE  
+**Maintained by**: TradeAndRoll Research Team
 

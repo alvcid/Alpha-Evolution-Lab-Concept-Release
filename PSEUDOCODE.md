@@ -1,21 +1,21 @@
-# Pseudocódigo del Sistema
+# System Pseudocode
 
-Este documento contiene pseudocódigo explicativo del sistema. **NO contiene código real del proyecto**, solo representaciones conceptuales para fines de documentación.
+This document contains explanatory pseudocode of the system. **It does NOT contain real project code**, only conceptual representations for documentation purposes.
 
-## Proceso Principal de Evolución
+## Main Evolution Process
 
 ```
 FUNCTION main_evolution_loop(initial_prompt, max_generations, population_size):
-    // Inicialización
+    // Initialization
     population = []
     generation = 0
     
-    // Generar población inicial
+    // Generate initial population
     population = generate_initial_population(initial_prompt, population_size)
     
-    // Bucle de evolución
+    // Evolution loop
     WHILE generation < max_generations:
-        // Evaluar todos los alphas en la población actual
+        // Evaluate all alphas in current population
         FOR EACH alpha IN population:
             IF alpha.status == 'pending':
                 result = evaluate_alpha(alpha.code, training_data, validation_data)
@@ -23,7 +23,7 @@ FUNCTION main_evolution_loop(initial_prompt, max_generations, population_size):
                 alpha.validation_score = result.out_of_sample_ic
                 alpha.status = 'scored'
         
-        // Detectar problemas
+        // Detect problems
         IF detect_overfitting(population):
             LOG_WARNING("Overfitting detected, stopping evolution")
             BREAK
@@ -32,45 +32,45 @@ FUNCTION main_evolution_loop(initial_prompt, max_generations, population_size):
             LOG_INFO("Convergence reached")
             BREAK
         
-        // Selección de padres
+        // Parent selection
         candidates = filter_valid_alphas(population)
         elite_alphas = select_top_n(candidates, n=3)
         random_alpha = select_random(candidates, exclude=elite_alphas)
         parents = [elite_alphas, random_alpha]
         
-        // Generar nueva generación mediante mutación
+        // Generate new generation through mutation
         new_alphas = []
         FOR EACH parent IN parents:
             mutations = mutate_alpha(parent, mutation_strategy)
             new_alphas.extend(mutations)
         
-        // Actualizar población
+        // Update population
         population = merge_populations(population, new_alphas)
         population = keep_top_k(population, k=population_size)
         
         generation = generation + 1
         LOG_PROGRESS(generation, population)
     
-    // Retornar mejores alphas
+    // Return best alphas
     best_alphas = select_top_n(population, n=10)
     RETURN best_alphas
 END FUNCTION
 ```
 
-## Generación de Población Inicial
+## Initial Population Generation
 
 ```
 FUNCTION generate_initial_population(prompt, size):
-    // Construir prompt completo con contexto
+    // Build complete prompt with context
     full_prompt = build_generation_prompt(prompt, size)
     
-    // Solicitar generación al LLM
+    // Request generation from LLM
     llm_response = call_llm_service(full_prompt)
     
-    // Parsear respuesta
+    // Parse response
     alpha_codes = parse_llm_response(llm_response)
     
-    // Crear objetos Alpha
+    // Create Alpha objects
     population = []
     FOR EACH code IN alpha_codes:
         alpha = create_alpha_object(
@@ -85,35 +85,35 @@ FUNCTION generate_initial_population(prompt, size):
 END FUNCTION
 ```
 
-## Evaluación de Alpha
+## Alpha Evaluation
 
 ```
 FUNCTION evaluate_alpha(alpha_code, training_data, validation_data):
-    // Validar código
+    // Validate code
     IF NOT validate_code_syntax(alpha_code):
         RETURN error_result("Invalid syntax")
     
-    // Ejecutar alpha en datos de entrenamiento
+    // Execute alpha on training data
     training_signals = execute_alpha_safely(alpha_code, training_data)
     training_returns = calculate_forward_returns(training_data)
     
-    // Calcular IC in-sample
+    // Calculate in-sample IC
     in_sample_ic = calculate_ic(training_signals, training_returns)
     
-    // Ejecutar alpha en datos de validación
+    // Execute alpha on validation data
     validation_signals = execute_alpha_safely(alpha_code, validation_data)
     validation_returns = calculate_forward_returns(validation_data)
     
-    // Calcular IC out-of-sample
+    // Calculate out-of-sample IC
     out_of_sample_ic = calculate_ic(validation_signals, validation_returns)
     
-    // Calcular métricas adicionales
+    // Calculate additional metrics
     metrics = calculate_additional_metrics(
         signals: validation_signals,
         returns: validation_returns
     )
     
-    // Detectar anomalías
+    // Detect anomalies
     IF in_sample_ic > SUSPICIOUS_THRESHOLD:
         LOG_WARNING("Suspiciously high IC, possible data leakage")
     
@@ -129,18 +129,18 @@ FUNCTION evaluate_alpha(alpha_code, training_data, validation_data):
 END FUNCTION
 ```
 
-## Cálculo de Information Coefficient
+## Information Coefficient Calculation
 
 ```
 FUNCTION calculate_ic(signals, forward_returns):
-    // Validar inputs
+    // Validate inputs
     IF length(signals) != length(forward_returns):
         RETURN error("Mismatched lengths")
     
-    // Calcular correlación de Spearman (robusta a outliers)
+    // Calculate Spearman correlation (robust to outliers)
     ic = spearman_correlation(signals, forward_returns)
     
-    // Validar resultado
+    // Validate result
     IF abs(ic) > 0.1:
         LOG_WARNING("Unusually high IC, verify for data leakage")
     
@@ -148,20 +148,20 @@ FUNCTION calculate_ic(signals, forward_returns):
 END FUNCTION
 ```
 
-## Mutación de Alpha
+## Alpha Mutation
 
 ```
 FUNCTION mutate_alpha(parent_alpha, strategy):
-    // Construir prompt de mutación según estrategia
+    // Build mutation prompt according to strategy
     mutation_prompt = build_mutation_prompt(parent_alpha, strategy)
     
-    // Solicitar mutaciones al LLM
+    // Request mutations from LLM
     llm_response = call_llm_service(mutation_prompt)
     
-    // Parsear múltiples variantes
+    // Parse multiple variants
     mutated_codes = parse_llm_response(llm_response, expected_count=5)
     
-    // Crear objetos Alpha mutados
+    // Create mutated Alpha objects
     mutations = []
     FOR EACH code IN mutated_codes:
         mutation = create_alpha_object(
@@ -176,7 +176,7 @@ FUNCTION mutate_alpha(parent_alpha, strategy):
 END FUNCTION
 ```
 
-## Construcción de Prompts
+## Prompt Construction
 
 ```
 FUNCTION build_mutation_prompt(alpha, strategy):
@@ -206,7 +206,7 @@ FUNCTION build_mutation_prompt(alpha, strategy):
 END FUNCTION
 ```
 
-## Detección de Overfitting
+## Overfitting Detection
 
 ```
 FUNCTION detect_overfitting(population):
@@ -221,38 +221,38 @@ FUNCTION detect_overfitting(population):
 END FUNCTION
 ```
 
-## Selección Elitista
+## Elitist Selection
 
 ```
 FUNCTION select_top_n(population, n):
-    // Filtrar alphas válidos
+    // Filter valid alphas
     valid_alphas = FILTER population WHERE status == 'scored' AND score IS NOT NULL
     
-    // Ordenar por score descendente
+    // Sort by descending score
     sorted_alphas = SORT valid_alphas BY score DESC
     
-    // Retornar top N
+    // Return top N
     RETURN sorted_alphas[0:n]
 END FUNCTION
 ```
 
-## Ejecución Segura de Código
+## Safe Code Execution
 
 ```
 FUNCTION execute_alpha_safely(alpha_code, market_data):
-    // Validar sintaxis
+    // Validate syntax
     IF NOT validate_python_syntax(alpha_code):
         THROW SyntaxError
     
-    // Preparar entorno sandbox
+    // Prepare sandbox environment
     sandbox = create_sandbox_environment()
     sandbox.set_timeout(MAX_EXECUTION_TIME)
     sandbox.set_memory_limit(MAX_MEMORY)
     
-    // Inyectar datos de mercado
+    // Inject market data
     sandbox.set_variable('data', market_data)
     
-    // Ejecutar código
+    // Execute code
     TRY:
         signals = sandbox.execute(alpha_code)
         RETURN signals
@@ -270,17 +270,17 @@ FUNCTION execute_alpha_safely(alpha_code, market_data):
 END FUNCTION
 ```
 
-## Cálculo de Métricas Adicionales
+## Additional Metrics Calculation
 
 ```
 FUNCTION calculate_additional_metrics(signals, returns):
-    // Calcular retornos de la estrategia
+    // Calculate strategy returns
     strategy_returns = signals * returns
     
     // Sharpe Ratio
     sharpe = mean(strategy_returns) / std(strategy_returns) * sqrt(252)
     
-    // Sortino Ratio (solo desviación negativa)
+    // Sortino Ratio (only negative deviation)
     negative_returns = FILTER strategy_returns WHERE value < 0
     sortino = mean(strategy_returns) / std(negative_returns) * sqrt(252)
     
@@ -308,27 +308,27 @@ FUNCTION calculate_additional_metrics(signals, returns):
 END FUNCTION
 ```
 
-## Gestión de Población
+## Population Management
 
 ```
 FUNCTION merge_populations(old_population, new_alphas):
-    // Combinar poblaciones
+    // Combine populations
     combined = old_population + new_alphas
     
-    // Eliminar duplicados (por código hash)
+    // Remove duplicates (by code hash)
     unique_alphas = remove_duplicates(combined, key='code_hash')
     
     RETURN unique_alphas
 END FUNCTION
 
 FUNCTION keep_top_k(population, k):
-    // Ordenar por score
+    // Sort by score
     sorted_pop = SORT population BY score DESC
     
-    // Mantener top K
+    // Keep top K
     top_k = sorted_pop[0:k]
     
-    // Opcional: mantener algunos aleatorios para diversidad
+    // Optional: keep some random ones for diversity
     remaining = sorted_pop[k:]
     IF LENGTH(remaining) > 0:
         random_sample = SAMPLE(remaining, size=min(2, LENGTH(remaining)))
@@ -338,15 +338,15 @@ FUNCTION keep_top_k(population, k):
 END FUNCTION
 ```
 
-## Constantes y Umbrales
+## Constants and Thresholds
 
 ```
 CONSTANTS:
-    SUSPICIOUS_THRESHOLD = 0.06  // IC sospechosamente alto
-    OVERFITTING_THRESHOLD = 0.5  // 50% de decay indica overfitting
-    DECENT_IC_THRESHOLD = 0.01   // IC mínimo para considerar "decente"
-    EXCELLENT_IC_THRESHOLD = 0.03 // IC para considerar "excelente"
-    MAX_EXECUTION_TIME = 30      // segundos
+    SUSPICIOUS_THRESHOLD = 0.06  // Suspiciously high IC
+    OVERFITTING_THRESHOLD = 0.5  // 50% decay indicates overfitting
+    DECENT_IC_THRESHOLD = 0.01   // Minimum IC to consider "decent"
+    EXCELLENT_IC_THRESHOLD = 0.03 // IC to consider "excellent"
+    MAX_EXECUTION_TIME = 30      // seconds
     MAX_MEMORY = 512             // MB
     DEFAULT_POPULATION_SIZE = 10
     DEFAULT_MUTATIONS_PER_PARENT = 5
@@ -354,5 +354,5 @@ CONSTANTS:
 
 ---
 
-**Nota**: Este pseudocódigo es una representación conceptual. La implementación real puede diferir en detalles específicos y optimizaciones.
+**Note**: This pseudocode is a conceptual representation. The actual implementation may differ in specific details and optimizations.
 

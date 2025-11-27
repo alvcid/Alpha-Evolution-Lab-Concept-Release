@@ -1,205 +1,205 @@
-# Roadmap de Desarrollo
+# Development Roadmap
 
-## Fase 1: Estabilidad y Robustez (Q1 2025)
+## Phase 1: Stability and Robustness (Q1 2025)
 
-### Objetivos
-Mejorar la confiabilidad del sistema y prevenir errores comunes en desarrollo cuantitativo.
+### Objectives
+Improve system reliability and prevent common errors in quantitative development.
 
-### Tareas
+### Tasks
 
-#### 1.1 Prevención de Data Leakage
-- [ ] Implementar purged cross-validation
-- [ ] Detección automática de look-ahead bias
-- [ ] Validación de uso correcto de datos históricos
-- [ ] Tests unitarios para casos de data leakage
+#### 1.1 Data Leakage Prevention
+- [ ] Implement purged cross-validation
+- [ ] Automatic look-ahead bias detection
+- [ ] Validation of correct use of historical data
+- [ ] Unit tests for data leakage cases
 
-#### 1.2 Validación Mejorada
-- [ ] Sistema de alertas para métricas sospechosas
-- [ ] Validación de código más estricta
-- [ ] Detección de patrones de overfitting
-- [ ] Análisis de estabilidad temporal de IC
+#### 1.2 Improved Validation
+- [ ] Alert system for suspicious metrics
+- [ ] Stricter code validation
+- [ ] Overfitting pattern detection
+- [ ] Temporal IC stability analysis
 
-#### 1.3 Manejo de Errores
-- [ ] Mejor logging y debugging
-- [ ] Recuperación graceful de errores de LLM
-- [ ] Timeouts configurables para backtests
-- [ ] Notificaciones de errores al usuario
+#### 1.3 Error Handling
+- [ ] Better logging and debugging
+- [ ] Graceful recovery from LLM errors
+- [ ] Configurable timeouts for backtests
+- [ ] Error notifications to user
 
-### Métricas de Éxito
-- Reducción de falsos positivos (alphas con IC alto pero overfitted) en 50%
-- Tiempo de detección de data leakage < 1 segundo
-- Tasa de errores en ejecución < 1%
-
----
-
-## Fase 2: Expansión de Capacidades (Q2 2025)
-
-### Objetivos
-Ampliar las capacidades del sistema para soportar más casos de uso y mercados.
-
-### Tareas
-
-#### 2.1 Múltiples Timeframes
-- [ ] Soporte para datos intraday (1min, 5min, 15min)
-- [ ] Soporte para datos semanales y mensuales
-- [ ] Adaptación automática de parámetros según timeframe
-- [ ] UI para selección de timeframe
-
-#### 2.2 Múltiples Fuentes de Datos
-- [ ] Integración con más APIs de mercado
-- [ ] Soporte para datos de criptomonedas
-- [ ] Carga de datos desde archivos locales
-- [ ] Sistema de cache para datos descargados
-
-#### 2.3 Combinación de Alphas
-- [ ] Sistema de ensemble methods
-- [ ] Optimización de pesos para combinación
-- [ ] Análisis de correlación entre alphas
-- [ ] Visualización de portfolio de alphas
-
-### Métricas de Éxito
-- Soporte para 3+ timeframes diferentes
-- Integración con 2+ nuevas fuentes de datos
-- Reducción de correlación en portfolio de alphas en 30%
+### Success Metrics
+- 50% reduction in false positives (alphas with high IC but overfitted)
+- Data leakage detection time < 1 second
+- Runtime error rate < 1%
 
 ---
 
-## Fase 3: Optimización Avanzada (Q3 2025)
+## Phase 2: Capability Expansion (Q2 2025)
 
-### Objetivos
-Implementar técnicas avanzadas de optimización y análisis.
+### Objectives
+Expand system capabilities to support more use cases and markets.
 
-### Tareas
+### Tasks
 
-#### 3.1 Optimización de Hiperparámetros
-- [ ] Bayesian optimization para parámetros de alphas
-- [ ] Grid search inteligente
-- [ ] Optimización multi-objetivo (IC vs Sharpe)
-- [ ] Auto-tuning de parámetros según condiciones de mercado
+#### 2.1 Multiple Timeframes
+- [ ] Support for intraday data (1min, 5min, 15min)
+- [ ] Support for weekly and monthly data
+- [ ] Automatic parameter adaptation according to timeframe
+- [ ] UI for timeframe selection
 
-#### 3.2 Análisis Avanzado
-- [ ] Análisis de régimen de mercado automático
-- [ ] Detección de cambios estructurales
-- [ ] Análisis de riesgo por escenario
-- [ ] Stress testing de alphas
+#### 2.2 Multiple Data Sources
+- [ ] Integration with more market APIs
+- [ ] Support for cryptocurrency data
+- [ ] Data loading from local files
+- [ ] Cache system for downloaded data
 
-#### 3.3 Backtesting Mejorado
-- [ ] Walk-forward analysis con ventanas móviles
+#### 2.3 Alpha Combination
+- [ ] Ensemble methods system
+- [ ] Weight optimization for combination
+- [ ] Correlation analysis between alphas
+- [ ] Alpha portfolio visualization
+
+### Success Metrics
+- Support for 3+ different timeframes
+- Integration with 2+ new data sources
+- 30% reduction in correlation in alpha portfolio
+
+---
+
+## Phase 3: Advanced Optimization (Q3 2025)
+
+### Objectives
+Implement advanced optimization and analysis techniques.
+
+### Tasks
+
+#### 3.1 Hyperparameter Optimization
+- [ ] Bayesian optimization for alpha parameters
+- [ ] Intelligent grid search
+- [ ] Multi-objective optimization (IC vs Sharpe)
+- [ ] Auto-tuning of parameters according to market conditions
+
+#### 3.2 Advanced Analysis
+- [ ] Automatic market regime analysis
+- [ ] Structural change detection
+- [ ] Scenario-based risk analysis
+- [ ] Alpha stress testing
+
+#### 3.3 Improved Backtesting
+- [ ] Walk-forward analysis with moving windows
 - [ ] Monte Carlo simulation
-- [ ] Análisis de sensibilidad de parámetros
-- [ ] Backtesting con costos de transacción realistas
+- [ ] Parameter sensitivity analysis
+- [ ] Backtesting with realistic transaction costs
 
-### Métricas de Éxito
-- Mejora promedio de IC en 15% mediante optimización
-- Reducción de tiempo de optimización en 40%
-- Cobertura de 5+ escenarios de stress testing
+### Success Metrics
+- Average IC improvement of 15% through optimization
+- 40% reduction in optimization time
+- Coverage of 5+ stress testing scenarios
 
 ---
 
-## Fase 4: Producción y Escalabilidad (Q4 2025)
+## Phase 4: Production and Scalability (Q4 2025)
 
-### Objetivos
-Preparar el sistema para uso en producción con múltiples usuarios.
+### Objectives
+Prepare the system for production use with multiple users.
 
-### Tareas
+### Tasks
 
-#### 4.1 Backend Dedicado
-- [ ] Migración de lógica crítica a servidor
-- [ ] API REST para todas las operaciones
-- [ ] Autenticación y autorización
-- [ ] Rate limiting y quotas
+#### 4.1 Dedicated Backend
+- [ ] Migration of critical logic to server
+- [ ] REST API for all operations
+- [ ] Authentication and authorization
+- [ ] Rate limiting and quotas
 
-#### 4.2 Persistencia de Datos
-- [ ] Base de datos para alphas y resultados
-- [ ] Sistema de versionado de alphas
-- [ ] Historial de evoluciones
-- [ ] Backup y recuperación
+#### 4.2 Data Persistence
+- [ ] Database for alphas and results
+- [ ] Alpha versioning system
+- [ ] Evolution history
+- [ ] Backup and recovery
 
-#### 4.3 Monitoreo y Alertas
-- [ ] Dashboard de monitoreo en tiempo real
-- [ ] Alertas de degradación de performance
-- [ ] Notificaciones de nuevos alphas prometedores
-- [ ] Reportes automáticos de evolución
+#### 4.3 Monitoring and Alerts
+- [ ] Real-time monitoring dashboard
+- [ ] Performance degradation alerts
+- [ ] Notifications of new promising alphas
+- [ ] Automatic evolution reports
 
-#### 4.4 Escalabilidad
-- [ ] Procesamiento asíncrono con queues
-- [ ] Distribución de carga
-- [ ] Cache distribuido
-- [ ] Optimización de llamadas a LLM
+#### 4.4 Scalability
+- [ ] Asynchronous processing with queues
+- [ ] Load distribution
+- [ ] Distributed cache
+- [ ] LLM call optimization
 
-### Métricas de Éxito
-- Tiempo de respuesta API < 200ms (p95)
-- Soporte para 100+ usuarios concurrentes
+### Success Metrics
+- API response time < 200ms (p95)
+- Support for 100+ concurrent users
 - Uptime > 99.5%
-- Reducción de costos de LLM en 30% mediante optimización
+- 30% reduction in LLM costs through optimization
 
 ---
 
-## Fase 5: Funcionalidades Avanzadas (2026)
+## Phase 5: Advanced Features (2026)
 
-### Ideas para el Futuro
+### Ideas for the Future
 
-#### 5.1 Machine Learning Integrado
-- [ ] AutoML para selección de modelos
-- [ ] Feature engineering automático
-- [ ] Detección de patrones mediante ML
-- [ ] Reinforcement learning para optimización de estrategias
+#### 5.1 Integrated Machine Learning
+- [ ] AutoML for model selection
+- [ ] Automatic feature engineering
+- [ ] Pattern detection through ML
+- [ ] Reinforcement learning for strategy optimization
 
-#### 5.2 Análisis de Sentimiento
-- [ ] Integración con fuentes de noticias
-- [ ] Análisis de sentimiento de redes sociales
-- [ ] Incorporación de datos alternativos
-- [ ] Alphas basados en eventos
+#### 5.2 Sentiment Analysis
+- [ ] Integration with news sources
+- [ ] Social media sentiment analysis
+- [ ] Incorporation of alternative data
+- [ ] Event-based alphas
 
-#### 5.3 Trading Automatizado
-- [ ] Integración con brokers
-- [ ] Ejecución automática de señales
-- [ ] Gestión de riesgo en tiempo real
-- [ ] Portfolio management automático
+#### 5.3 Automated Trading
+- [ ] Broker integration
+- [ ] Automatic signal execution
+- [ ] Real-time risk management
+- [ ] Automatic portfolio management
 
-#### 5.4 Colaboración
-- [ ] Compartir alphas entre usuarios
-- [ ] Sistema de ratings y reviews
-- [ ] Marketplace de alphas
-- [ ] Comunidad de desarrolladores
+#### 5.4 Collaboration
+- [ ] Share alphas between users
+- [ ] Rating and review system
+- [ ] Alpha marketplace
+- [ ] Developer community
 
 ---
 
-## Priorización
+## Prioritization
 
-### Alta Prioridad (P0)
-- Prevención de data leakage
-- Validación mejorada
-- Manejo de errores robusto
+### High Priority (P0)
+- Data leakage prevention
+- Improved validation
+- Robust error handling
 
-### Media Prioridad (P1)
-- Múltiples timeframes
-- Backend dedicado
-- Persistencia de datos
+### Medium Priority (P1)
+- Multiple timeframes
+- Dedicated backend
+- Data persistence
 
-### Baja Prioridad (P2)
-- Funcionalidades avanzadas de ML
-- Trading automatizado
+### Low Priority (P2)
+- Advanced ML features
+- Automated trading
 - Marketplace
 
 ---
 
-## Notas de Implementación
+## Implementation Notes
 
-### Consideraciones Técnicas
-- Todas las nuevas features deben incluir tests
-- Documentación debe actualizarse con cada release
-- Breaking changes requieren migración guide
-- Performance debe monitorearse continuamente
+### Technical Considerations
+- All new features must include tests
+- Documentation must be updated with each release
+- Breaking changes require migration guide
+- Performance must be continuously monitored
 
-### Proceso de Desarrollo
-- Releases mensuales para features menores
-- Releases trimestrales para features mayores
-- Hotfixes según necesidad
-- Roadmap revisado trimestralmente
+### Development Process
+- Monthly releases for minor features
+- Quarterly releases for major features
+- Hotfixes as needed
+- Roadmap reviewed quarterly
 
 ---
 
-**Última actualización**: Noviembre 2024  
-**Próxima revisión**: Febrero 2025
+**Last update**: November 2024  
+**Next review**: February 2025
 

@@ -1,152 +1,152 @@
-# Resumen Ejecutivo Técnico
+# Technical Executive Summary
 
-## Visión General
+## Overview
 
-Alpha Evolution Lab es una plataforma experimental que automatiza la generación y optimización de señales cuantitativas (alphas) mediante la combinación de algoritmos evolutivos y modelos de lenguaje de última generación. El sistema aborda el desafío fundamental en trading cuantitativo: explorar eficientemente el vasto espacio de posibles estrategias de manera sistemática y validada.
+Alpha Evolution Lab is an experimental platform that automates the generation and optimization of quantitative signals (alphas) through the combination of evolutionary algorithms and state-of-the-art language models. The system addresses the fundamental challenge in quantitative trading: efficiently exploring the vast space of possible strategies in a systematic and validated manner.
 
-## Problema que Resuelve
+## Problem It Solves
 
-### Desafíos Tradicionales
+### Traditional Challenges
 
-1. **Exploración Manual Limitada**: Los quants tradicionalmente desarrollan alphas manualmente, limitando la exploración a un pequeño subconjunto del espacio de estrategias posibles.
+1. **Limited Manual Exploration**: Quants traditionally develop alphas manually, limiting exploration to a small subset of possible strategy space.
 
-2. **Tiempo de Desarrollo**: El ciclo típico de desarrollo de un alpha funcional puede tomar semanas o meses, incluyendo ideación, implementación, backtesting y refinamiento.
+2. **Development Time**: The typical development cycle of a functional alpha can take weeks or months, including ideation, implementation, backtesting, and refinement.
 
-3. **Sesgo Humano**: Las estrategias desarrolladas manualmente tienden a reflejar los sesgos y limitaciones del desarrollador.
+3. **Human Bias**: Manually developed strategies tend to reflect the biases and limitations of the developer.
 
-4. **Validación Inadecuada**: Muchas estrategias fallan en producción debido a overfitting o data leakage no detectado durante el desarrollo.
+4. **Inadequate Validation**: Many strategies fail in production due to overfitting or undetected data leakage during development.
 
-### Solución Propuesta
+### Proposed Solution
 
-Alpha Evolution Lab automatiza el proceso completo mediante:
+Alpha Evolution Lab automates the complete process through:
 
-- **Generación Automática**: LLMs generan código de señales a partir de descripciones de alto nivel
-- **Evolución Sistemática**: Algoritmos evolutivos refinan iterativamente las estrategias más prometedoras
-- **Validación Rigurosa**: Separación estricta de datos y métricas estándar de la industria previenen problemas comunes
-- **Escalabilidad**: El sistema puede explorar miles de variantes en horas, no semanas
+- **Automatic Generation**: LLMs generate signal code from high-level descriptions
+- **Systematic Evolution**: Evolutionary algorithms iteratively refine the most promising strategies
+- **Rigorous Validation**: Strict data separation and industry-standard metrics prevent common problems
+- **Scalability**: The system can explore thousands of variants in hours, not weeks
 
-## Arquitectura Técnica
+## Technical Architecture
 
-### Componentes Clave
+### Key Components
 
-1. **Motor de Evolución**: Gestiona poblaciones de alphas, implementa selección y mutación
-2. **Integración LLM**: Abstracción para múltiples proveedores (Gemini, OpenAI) con fallback
-3. **Framework de Backtesting**: Ejecución segura de código Python generado con cálculo de métricas
-4. **Pipeline de Datos**: Carga y preprocesamiento de datos históricos de mercado
-5. **Interfaz Visual**: Dashboard web para monitoreo y control en tiempo real
+1. **Evolution Engine**: Manages alpha populations, implements selection and mutation
+2. **LLM Integration**: Abstraction for multiple providers (Gemini, OpenAI) with fallback
+3. **Backtesting Framework**: Safe execution of generated Python code with metrics calculation
+4. **Data Pipeline**: Loading and preprocessing of historical market data
+5. **Visual Interface**: Web dashboard for real-time monitoring and control
 
-### Flujo de Trabajo
+### Workflow
 
 ```
-Prompt Usuario → Generación LLM → Evaluación → Selección → Mutación → Iteración
+User Prompt → LLM Generation → Evaluation → Selection → Mutation → Iteration
 ```
 
-Cada iteración mejora la población mediante selección natural artificial, donde solo los alphas con mejor rendimiento validado sobreviven y se reproducen.
+Each iteration improves the population through artificial natural selection, where only alphas with the best validated performance survive and reproduce.
 
-## Métricas y Validación
+## Metrics and Validation
 
 ### Information Coefficient (IC)
 
-El IC es la métrica principal, midiendo la correlación entre señal y retorno forward:
+IC is the main metric, measuring the correlation between signal and forward return:
 
-- **0.01 - 0.03**: Decente (señal débil pero real)
-- **0.03 - 0.05**: Excelente (raro a nivel individual)
-- **> 0.06**: Sospechoso (posible data leakage)
+- **0.01 - 0.03**: Decent (weak but real signal)
+- **0.03 - 0.05**: Excellent (rare at individual level)
+- **> 0.06**: Suspicious (possible data leakage)
 
-### Validación Out-of-Sample
+### Out-of-Sample Validation
 
-Separación estricta:
-- **Training**: 70% de datos históricos
-- **Validation**: 15% de datos históricos
-- **Test**: 15% de datos históricos
+Strict separation:
+- **Training**: 70% of historical data
+- **Validation**: 15% of historical data
+- **Test**: 15% of historical data
 
-IC Decay (diferencia entre IS y OOS) > 50% indica overfitting.
+IC Decay (difference between IS and OOS) > 50% indicates overfitting.
 
-### Métricas Adicionales
+### Additional Metrics
 
-- Sharpe Ratio: Retorno ajustado por riesgo
-- Maximum Drawdown: Pérdida máxima desde pico
-- Win Rate: Porcentaje de trades ganadores
-- Profit Factor: Ratio ganancias/pérdidas
+- Sharpe Ratio: Risk-adjusted return
+- Maximum Drawdown: Maximum loss from peak
+- Win Rate: Percentage of winning trades
+- Profit Factor: Gains/losses ratio
 
-## Ventajas Competitivas
+## Competitive Advantages
 
-### 1. Automatización Completa
+### 1. Complete Automation
 
-Reducción del tiempo de desarrollo de semanas a horas mediante automatización del ciclo completo de ideación, implementación y evaluación.
+Reduction of development time from weeks to hours through automation of the complete cycle of ideation, implementation, and evaluation.
 
-### 2. Exploración Sistemática
+### 2. Systematic Exploration
 
-El sistema explora sistemáticamente el espacio de estrategias, no limitado por sesgos humanos o tiempo disponible.
+The system systematically explores the strategy space, not limited by human biases or available time.
 
-### 3. Validación Incorporada
+### 3. Built-in Validation
 
-Prevención de errores comunes (data leakage, overfitting) mediante validación rigurosa en cada paso.
+Prevention of common errors (data leakage, overfitting) through rigorous validation at each step.
 
-### 4. Extensibilidad
+### 4. Extensibility
 
-Arquitectura modular permite fácil extensión a nuevos mercados, timeframes y tipos de señales.
+Modular architecture allows easy extension to new markets, timeframes, and signal types.
 
-## Limitaciones y Consideraciones
+## Limitations and Considerations
 
-### Limitaciones Actuales
+### Current Limitations
 
-1. **Rendimiento**: Ejecución en navegador (Pyodide) tiene limitaciones de velocidad
-2. **Persistencia**: No hay almacenamiento permanente entre sesiones
-3. **Procesamiento**: Evaluaciones bloquean la UI (síncrono)
-4. **Alcance**: Soporte limitado a un mercado a la vez
+1. **Performance**: Browser execution (Pyodide) has speed limitations
+2. **Persistence**: No permanent storage between sessions
+3. **Processing**: Evaluations block the UI (synchronous)
+4. **Scope**: Limited support to one market at a time
 
-### Consideraciones de Uso
+### Usage Considerations
 
-1. **Complemento, No Reemplazo**: El sistema complementa, no reemplaza, el juicio humano
-2. **Validación Manual**: Alphas prometedores requieren revisión manual antes de producción
-3. **Costo de LLM**: Uso extensivo puede incurrir costos significativos
-4. **Datos de Calidad**: Resultados dependen de calidad y limpieza de datos de entrada
+1. **Complement, Not Replacement**: The system complements, does not replace, human judgment
+2. **Manual Validation**: Promising alphas require manual review before production
+3. **LLM Cost**: Extensive use may incur significant costs
+4. **Data Quality**: Results depend on quality and cleanliness of input data
 
-## Casos de Uso
+## Use Cases
 
-### 1. Exploración Rápida de Ideas
+### 1. Rapid Idea Exploration
 
-Generar y evaluar rápidamente múltiples variantes de una idea de estrategia para identificar las más prometedoras.
+Quickly generate and evaluate multiple variants of a strategy idea to identify the most promising ones.
 
-### 2. Refinamiento Iterativo
+### 2. Iterative Refinement
 
-Mejorar sistemáticamente alphas existentes mediante evolución guiada.
+Systematically improve existing alphas through guided evolution.
 
-### 3. Prototipado
+### 3. Prototyping
 
-Desarrollar prototipos rápidos de estrategias antes de inversión significativa en desarrollo manual.
+Develop quick strategy prototypes before significant investment in manual development.
 
-### 4. Educación e Investigación
+### 4. Education and Research
 
-Herramienta educativa para entender el proceso de desarrollo de estrategias cuantitativas.
+Educational tool to understand the quantitative strategy development process.
 
-## Roadmap Estratégico
+## Strategic Roadmap
 
-### Corto Plazo (Q1-Q2 2025)
-- Mejora de estabilidad y robustez
-- Expansión a múltiples timeframes
-- Integración con más fuentes de datos
+### Short Term (Q1-Q2 2025)
+- Stability and robustness improvements
+- Expansion to multiple timeframes
+- Integration with more data sources
 
-### Medio Plazo (Q3-Q4 2025)
-- Optimización avanzada de hiperparámetros
-- Backend dedicado para mejor rendimiento
-- Sistema de persistencia y versionado
+### Medium Term (Q3-Q4 2025)
+- Advanced hyperparameter optimization
+- Dedicated backend for better performance
+- Persistence and versioning system
 
-### Largo Plazo (2026+)
-- Machine Learning integrado
-- Trading automatizado
-- Marketplace de alphas
+### Long Term (2026+)
+- Integrated Machine Learning
+- Automated trading
+- Alpha marketplace
 
-## Conclusión
+## Conclusion
 
-Alpha Evolution Lab representa un enfoque novedoso para la generación automatizada de estrategias cuantitativas, combinando la potencia de los LLMs con la disciplina de los algoritmos evolutivos y la validación rigurosa de la industria cuantitativa.
+Alpha Evolution Lab represents a novel approach to automated quantitative strategy generation, combining the power of LLMs with the discipline of evolutionary algorithms and the rigorous validation of the quantitative industry.
 
-El sistema está diseñado para ser una herramienta de exploración y prototipado, no un reemplazo completo del proceso de desarrollo cuantitativo tradicional. Su valor radica en la capacidad de explorar sistemáticamente espacios de estrategias que serían inaccesibles mediante desarrollo manual, mientras mantiene estándares rigurosos de validación.
+The system is designed to be an exploration and prototyping tool, not a complete replacement for the traditional quantitative development process. Its value lies in the ability to systematically explore strategy spaces that would be inaccessible through manual development, while maintaining rigorous validation standards.
 
 ---
 
-**Versión**: 0.1.0 (Concept Release)  
-**Fecha**: Noviembre 2024  
-**Estado**: Desarrollo Activo
+**Version**: 0.1.0 (Concept Release)  
+**Date**: November 2024  
+**Status**: Active Development
 
